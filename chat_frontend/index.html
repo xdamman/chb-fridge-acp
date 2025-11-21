@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Assistant - ACP Demo</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="modal-styles.css?v=2">
+</head>
+<body>
+    <div class="container">
+        <div class="chat-header">
+            <h1>Shopping Assistant</h1>
+            <p>Find and purchase products through chat</p>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be added here dynamically -->
+        </div>
+        
+        <div class="chat-input-container">
+            <input 
+                type="text" 
+                id="userInput" 
+                class="chat-input" 
+                placeholder="Ask anything..."
+                autocomplete="off"
+            >
+            <button id="sendButton" class="send-button">Send</button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modalTitle">Product Details</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be inserted here -->
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <!-- Footer buttons will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js?v=2"></script>
+</body>
+</html>
+
