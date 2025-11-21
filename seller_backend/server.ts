@@ -17,6 +17,8 @@ dotenv.config();
 
 import express, { Request, Response, NextFunction } from 'express';
 import * as OpenApiValidator from 'express-openapi-validator';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 import path from 'path';
 import { components } from './types/openapi';
 import {
@@ -122,13 +124,22 @@ const apiSpecPath = __dirname.includes('/dist')
   ? path.join(__dirname, '..', 'openapi.agentic_checkout.yaml')
   : path.join(__dirname, 'openapi.agentic_checkout.yaml');
 
+// Load OpenAPI spec for Swagger UI
+const openApiSpec = YAML.load(apiSpecPath);
+
+// Swagger UI setup
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiSpec, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'ACP Seller Backend API Documentation'
+}));
+
 app.use(
   OpenApiValidator.middleware({
     apiSpec: apiSpecPath,
     validateRequests: true,
     validateResponses: false,
     validateSecurity: false,
-    ignorePaths: /\/products|\//,
+    ignorePaths: /\/products|\/api-docs|\//,
   })
 );
 
@@ -138,6 +149,14 @@ const checkouts: CheckoutStore = {};
 // ============================================================================
 // MAIN ENDPOINTS
 // ============================================================================
+
+/**
+ * GET /
+ * Root endpoint - redirects to API documentation
+ */
+app.get('/', (_req: Request, res: Response) => {
+  res.redirect('/api-docs');
+});
 
 /**
  * POST /checkout_sessions

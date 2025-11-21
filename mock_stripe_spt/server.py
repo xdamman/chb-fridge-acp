@@ -189,6 +189,56 @@ def _store_spt(spt_id: str, payment_method: str, currency: str, max_amount: Opti
 # API ENDPOINTS
 # ============================================================================
 
+@app.route('/', methods=['GET'])
+def index():
+    """Root endpoint - shows available endpoints"""
+    html = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Mock Stripe SPT Server</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+            .container { background: white; padding: 30px; border-radius: 8px; max-width: 800px; }
+            h1 { color: #333; }
+            h2 { color: #666; margin-top: 30px; }
+            .endpoint { background: #f9f9f9; padding: 15px; margin: 10px 0; border-left: 4px solid #667eea; }
+            .method { display: inline-block; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-right: 10px; }
+            .post { background: #49cc90; color: white; }
+            .get { background: #61affe; color: white; }
+            code { background: #e8e8e8; padding: 2px 6px; border-radius: 3px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Mock Stripe Shared Payment Token Server</h1>
+            <p>Mock server that simulates Stripe's Shared Payment Token (SPT) API for demo purposes.</p>
+            
+            <h2>Available Endpoints</h2>
+            
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <code>/v1/shared_payment/issued_tokens</code>
+                <p>Create a new Shared Payment Token</p>
+            </div>
+            
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <code>/v1/shared_payment/granted_tokens/&lt;spt_id&gt;</code>
+                <p>Retrieve payment method details for an SPT</p>
+            </div>
+            
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <code>/health</code>
+                <p>Health check endpoint</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    return html
+
 @app.route('/v1/shared_payment/issued_tokens', methods=['POST'])
 def create_spt() -> tuple[Response, int]:
     """
