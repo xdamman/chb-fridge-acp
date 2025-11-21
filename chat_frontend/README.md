@@ -5,12 +5,15 @@ Interactive chat interface for shopping using the Agentic Commerce Protocol.
 ## Quick Start
 
 ### Prerequisites
-Make sure both backends are running:
+Make sure all backends are running:
 ```bash
-# Terminal 1 - Seller Backend
+# Terminal 1 - Mock SPT Server
+cd mock_stripe_spt && python server.py
+
+# Terminal 2 - Seller Backend
 cd seller_backend && npm start
 
-# Terminal 2 - Chat Backend
+# Terminal 3 - Chat Backend
 cd chat_backend && source venv/bin/activate && python server.py
 ```
 
@@ -38,5 +41,5 @@ chat_frontend/
 
 Change API URL in `app.js`:
 ```javascript
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'http://localhost:9000';
 ```

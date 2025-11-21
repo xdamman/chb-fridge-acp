@@ -49,7 +49,8 @@ seller_backend/
 
 ## Environment Variables
 
-Create a `.env` file:
-```
-SELLER_API_KEY=your_stripe_secret_key
+Create a `.env` file from `.env.example`:
+```bash
+SELLER_API_KEY="sk_test_..."      # Stripe secret key (REQUIRED)
+MOCK_STRIPE_SPT_URL="http://localhost:8001"  # Mock SPT server URL
 ```
