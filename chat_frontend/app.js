@@ -49,9 +49,9 @@ userInput.addEventListener('keypress', (e) => {
 
 // Initialize chat
 window.addEventListener('load', () => {
-    addBotMessage("👋 Welcome to the Shopping Assistant! I'm here to help you shop.");
+    addBotMessage("👋 Welcome to the Fridge Assistant! I'm here to help you find the best drink.");
     setTimeout(() => {
-        addBotMessage("Type 'show products' to browse available products !\n");
+        addBotMessage("Type 'show drinkgs' to see what is in the fridge !\n");
     }, 500);
 });
 
@@ -119,7 +119,7 @@ function handleToolCalls(toolCalls) {
     toolCalls.forEach(toolCall => {
         const functionName = toolCall.function.name;
         const args = JSON.parse(toolCall.function.arguments);
-
+    
         if (functionName === 'list_products') {
             // The backend already executed this and the LLM should have described the products.
             // But we can also trigger the UI display if we want rich cards.
@@ -696,9 +696,10 @@ function createProductCardHtml(product) {
             <div class="product-card-content">
                 <h3>${escapeHtml(product.name)}</h3>
                 <p>${escapeHtml(product.description)}</p>
+                <span class="product-tag-pill">${escapeHtml(product.tag || "Other")}</span>
                 <div class="product-card-footer">
                     <span class="product-price">$${(product.price / 100).toFixed(2)}</span>
-                </div>
+                </div>                
             </div>
         </div>
     `;

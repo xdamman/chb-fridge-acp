@@ -54,6 +54,7 @@ export enum LinkType {
   PRIVACY_POLICY = "privacy_policy",
   SELLER_SHOP_POLICIES = "seller_shop_policies",
 }
+type Tag = "wine" | "warm" | "beer" | "soft" | "almost beer" | "strong beer";
 
 /**
  * Product interface for the catalog
@@ -70,7 +71,7 @@ export interface Product {
     city: string;
     country: string;
   };
-  tags: string[];
+  tag?: Tag;
 }
 
 /**
@@ -311,33 +312,13 @@ export function getFulfillmentOptions(): FulfillmentOptionShipping[] {
   return [
     {
       type: FulfillmentType.SHIPPING,
-      id: "shipping_standard",
-      title: "Standard Shipping",
-      subtitle: "5-7 business days",
-      carrier: "USPS",
-      subtotal: "300", // $3.00
+      id: "free",
+      title: "Take from Fridge",
+      subtitle: "In a second",
+      carrier: "Yourself",
+      subtotal: "0", 
       tax: "0",
-      total: "300",
-    },
-    {
-      type: FulfillmentType.SHIPPING,
-      id: "shipping_fast",
-      title: "Express Shipping",
-      subtitle: "2-3 business days",
-      carrier: "FedEx",
-      subtotal: "500", // $5.00
-      tax: "0",
-      total: "500",
-    },
-    {
-      type: FulfillmentType.SHIPPING,
-      id: "shipping_overnight",
-      title: "Overnight Shipping",
-      subtitle: "Next business day",
-      carrier: "FedEx",
-      subtotal: "800", // $8.00
-      tax: "0",
-      total: "800",
+      total: "0",
     },
   ];
 }

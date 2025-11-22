@@ -32,7 +32,7 @@ class LLMService:
                 "type": "function",
                 "function": {
                     "name": "list_products",
-                    "description": "Get a list of available products from the catalog. Use this when the user asks to see products or what is for sale.",
+                    "description": "Get a list of available drinks from the catalog. Use this when the user asks to see drinks or what is for sale.",
                     "parameters": {
                         "type": "object",
                         "properties": {},
